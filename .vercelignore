@@ -1,0 +1,8 @@
+index.php
+config.php
+setup_db.php
+create_status_table.php
+update_db_v2.php
+composer.phar
+composer.lock
+/vendor/
