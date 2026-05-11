@@ -91,13 +91,9 @@
         /* --- Mockup Layout --- */
         .mock-container {
             display: flex;
-            min-height: 800px;
+            min-height: calc(100vh - 108px); /* Adjust for bars */
             background: #0f172a;
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 24px;
-            margin: 0 40px 60px;
             overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
         }
 
         .mock-navbar {
@@ -187,7 +183,7 @@
     </div>
 
     <!-- Mock Navbar -->
-    <div style="margin: 0 40px; border-radius: 24px 24px 0 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); border-bottom: none; margin-top: 40px;">
+    <div style="overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.05);">
         <nav class="mock-navbar">
             <div class="d-flex align-items-center fw-bold text-white fs-5">
                 <i class="bi bi-envelope-check-fill text-primary me-2"></i> CleanBox AI
@@ -202,7 +198,7 @@
         </nav>
     </div>
 
-    <div class="mock-container">
+    <div class="mock-container" style="margin: 0; border-radius: 0; border: none;">
         <!-- Mock Sidebar -->
         <div class="mock-sidebar">
             <a href="#" class="sidebar-link active"><i class="bi bi-grid-1x2"></i> Dashboard</a>
