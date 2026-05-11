@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanBox AI | Live Demo Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --sidebar-bg: #1e293b;
+            --main-bg: #0f172a;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--main-bg);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- Portfolio Top Bar --- */
+        .portfolio-bar {
+            background: #000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .demo-badge {
+            background: #f39c12;
+            color: black;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .bar-text {
+            color: #ccc;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .bar-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .bar-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .bar-btn-primary {
+            background: #27ae60;
+            color: white;
+        }
+
+        /* --- Mockup Layout --- */
+        .mock-container {
+            display: flex;
+            min-height: calc(100vh - 54px);
+            background: #0f172a;
+        }
+
+        .mock-navbar {
+            background: #1e293b;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 54px; /* Account for Portfolio Bar */
+            z-index: 1000;
+        }
+
+        .mock-sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: #1e293b;
+            padding: 30px 20px;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .mock-main {
+            flex-grow: 1;
+            padding: 40px 50px;
+            overflow-x: hidden;
+            width: 0; /* Important for flex-grow with overflow */
+        }
+
+        .mock-card-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 18px;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .sidebar-link i {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-link.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+        }
+
+        .sidebar-link:hover:not(.active) {
+            background: rgba(255,255,255,0.05);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* --- Cards & Stats --- */
+        .stat-card {
+            background: #1e293b;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(13, 110, 253, 0.3);
+        }
+
+        .stat-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .scan-config-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.5) 100%);
+            border: 1px solid rgba(13, 110, 253, 0.4);
+            border-radius: 24px;
+            padding: 40px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* --- Table Mock --- */
+        .mock-table {
+            background: #1e293b;
+            border-radius: 16px;
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+            overflow: hidden;
+        }
+
+        .mock-table th {
+            background: rgba(255,255,255,0.03);
+            padding: 15px 20px;
+            text-align: left;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .mock-table td {
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            font-size: 0.9rem;
+        }
+
+        .badge-success { background: rgba(39, 174, 96, 0.1); color: #2ecc71; padding: 4px 10px; border-radius: 50px; font-size: 0.75rem; }
+
+        @media (max-width: 992px) {
+            .mock-sidebar { display: none; }
+            .mock-main { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Portfolio Top Bar -->
+    <div class="portfolio-bar">
+        <span class="demo-badge">Live Demo</span>
+        <p class="bar-text">This is a static showcase of the <b>CleanBox AI</b> application.</p>
+        <a href="https://personal-portfolio-ashen-kappa-71.vercel.app/projects.html" class="bar-btn">Back to Portfolio</a>
+    </div>
+
+    <!-- Mock Navbar -->
+    <nav class="mock-navbar">
+        <div class="d-flex align-items-center fw-bold text-white fs-5">
+            <i class="bi bi-envelope-check-fill text-primary me-2"></i> CleanBox AI
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="text-end d-none d-sm-block">
+                <div class="fw-bold small text-white">Lokesh Ahire</div>
+                <div class="text-muted" style="font-size: 0.7rem;">Demo User</div>
+            </div>
+            <img src="https://i.pravatar.cc/150?u=lokesh" width="35" height="35" class="rounded-circle border border-2 border-primary">
+        </div>
+    </nav>
+
+    <div class="mock-container">
+        <!-- Mock Sidebar -->
+        <div class="mock-sidebar">
+            <a href="#" class="sidebar-link active"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+            <a href="#" class="sidebar-link"><i class="bi bi-tags"></i> Promotions <span class="badge bg-danger rounded-pill ms-auto" style="font-size: 0.6rem;">185</span></a>
+            <a href="#" class="sidebar-link"><i class="bi bi-newspaper"></i> Newsletters</a>
+            <a href="#" class="sidebar-link"><i class="bi bi-shield-x"></i> Spam/Junk <span class="badge bg-warning text-dark rounded-pill ms-auto" style="font-size: 0.6rem;">24</span></a>
+            <a href="#" class="sidebar-link"><i class="bi bi-shield-lock"></i> OTP Cleanup <span class="badge bg-info text-dark rounded-pill ms-auto" style="font-size: 0.6rem;">35</span></a>
+            <div class="mt-4 pt-3 border-top border-secondary opacity-25"></div>
+            <a href="#" class="sidebar-link"><i class="bi bi-bar-chart"></i> Reports</a>
+            <a href="#" class="sidebar-link"><i class="bi bi-sliders"></i> Settings</a>
+        </div>
+
+        <!-- Mock Main Content -->
+        <div class="mock-main">
+            <div class="mock-card-wrapper">
+                <div class="row mb-4 align-items-center">
+                    <div class="col">
+                        <h2 class="fw-bold text-white">Overview</h2>
+                        <p class="text-muted small mb-0">Track your inbox health and cleanup efficiency.</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary-subtle text-primary"><i class="bi bi-envelope-open"></i></div>
+                            <div class="text-muted small">Emails Scanned</div>
+                            <h3 class="fw-bold text-white mt-1">1,475</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning-subtle text-warning"><i class="bi bi-shield-lock"></i></div>
+                            <div class="text-muted small">Useless OTPs</div>
+                            <h3 class="fw-bold text-white mt-1">35</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-danger-subtle text-danger"><i class="bi bi-shield-exclamation"></i></div>
+                            <div class="text-muted small">Spam Found</div>
+                            <h3 class="fw-bold text-white mt-1">24</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success-subtle text-success"><i class="bi bi-hdd"></i></div>
+                            <div class="text-muted small">Space Freed</div>
+                            <h3 class="fw-bold text-white mt-1">99.7 MB</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scan-config-card">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <h4 class="fw-bold text-white mb-2">Ready to clean your inbox?</h4>
+                            <p class="text-muted mb-0">Our AI identifies promotional junk, newsletters, and expired OTPs in seconds.</p>
+                        </div>
+                        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                            <button class="btn btn-primary rounded-pill px-5 py-3 fw-bold shadow-lg">
+                                <i class="bi bi-lightning-charge-fill me-2"></i> Start Scanning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="fw-bold text-white mt-5 mb-3">Recent Activity</h4>
+                <div class="table-responsive">
+                    <table class="mock-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Action Taken</th>
+                                <th>Space Freed</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>May 11, 2026</td>
+                                <td>Bulk deleted 185 promotional emails</td>
+                                <td class="text-success fw-bold">+24.5 MB</td>
+                                <td><span class="badge-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>May 10, 2026</td>
+                                <td>Cleaned 35 expired OTPs & codes</td>
+                                <td class="text-success fw-bold">+1.2 MB</td>
+                                <td><span class="badge-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>May 09, 2026</td>
+                                <td>Emptied spam folder (24 emails)</td>
+                                <td class="text-success fw-bold">+4.8 MB</td>
+                                <td><span class="badge-success">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelectorAll('.sidebar-link, .mock-main button, .mock-navbar img, .mock-navbar .fw-bold.small').forEach(element => {
+            element.addEventListener('click', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Action Disabled',
+                    text: 'Demo Mode: This feature is only available in the live application after connecting your Gmail account.',
+                    icon: 'info',
+                    confirmButtonText: 'Understood',
+                    confirmButtonColor: '#0d6efd'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
