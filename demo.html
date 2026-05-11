@@ -63,21 +63,41 @@
             transition: 0.3s;
         }
 
-        .bar-btn:hover {
-            background: var(--primary);
-            color: white;
+        .bar-btn:hover { background: var(--primary); color: white; }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(13, 110, 253, 0.1), transparent);
         }
 
-        .bar-btn-primary {
-            background: #27ae60;
-            color: white;
+        .hero-section h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto 40px;
         }
 
         /* --- Mockup Layout --- */
         .mock-container {
             display: flex;
-            min-height: calc(100vh - 54px);
+            min-height: 800px;
             background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            margin: 0 40px 60px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
         }
 
         .mock-navbar {
@@ -87,9 +107,6 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            position: sticky;
-            top: 54px; /* Account for Portfolio Bar */
-            z-index: 1000;
         }
 
         .mock-sidebar {
@@ -104,12 +121,8 @@
             flex-grow: 1;
             padding: 40px 50px;
             overflow-x: hidden;
-            width: 0; /* Important for flex-grow with overflow */
-        }
-
-        .mock-card-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
+            width: 0;
+            background: #0f172a;
         }
 
         .sidebar-link {
@@ -124,89 +137,43 @@
             font-weight: 500;
         }
 
-        .sidebar-link i {
-            font-size: 1.2rem;
-            margin-right: 15px;
-            width: 24px;
-            text-align: center;
-        }
+        .sidebar-link i { font-size: 1.2rem; margin-right: 15px; width: 24px; text-align: center; }
+        .sidebar-link.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2); }
+        .sidebar-link:hover:not(.active) { background: rgba(255,255,255,0.05); color: white; transform: translateX(5px); }
 
-        .sidebar-link.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
-        }
-
-        .sidebar-link:hover:not(.active) {
-            background: rgba(255,255,255,0.05);
-            color: white;
-            transform: translateX(5px);
-        }
-
-        /* --- Cards & Stats --- */
         .stat-card {
             background: #1e293b;
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 20px;
             padding: 30px;
             height: 100%;
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(13, 110, 253, 0.3);
         }
 
         .stat-icon {
-            width: 55px;
-            height: 55px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+            width: 55px; height: 55px; border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; margin-bottom: 20px;
         }
 
         .scan-config-card {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.5) 100%);
             border: 1px solid rgba(13, 110, 253, 0.4);
-            border-radius: 24px;
-            padding: 40px;
-            margin-top: 40px;
+            border-radius: 24px; padding: 40px; margin-top: 40px;
             backdrop-filter: blur(10px);
         }
 
-        /* --- Table Mock --- */
         .mock-table {
-            background: #1e293b;
-            border-radius: 16px;
-            width: 100%;
-            margin-top: 30px;
-            border-collapse: collapse;
-            overflow: hidden;
+            background: #1e293b; border-radius: 16px; width: 100%; margin-top: 30px;
+            border-collapse: collapse; overflow: hidden;
         }
 
-        .mock-table th {
-            background: rgba(255,255,255,0.03);
-            padding: 15px 20px;
-            text-align: left;
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-
-        .mock-table td {
-            padding: 15px 20px;
-            border-top: 1px solid rgba(255,255,255,0.03);
-            font-size: 0.9rem;
-        }
-
+        .mock-table th { background: rgba(255,255,255,0.03); padding: 15px 20px; text-align: left; font-size: 0.85rem; color: #64748b; }
+        .mock-table td { padding: 15px 20px; border-top: 1px solid rgba(255,255,255,0.03); font-size: 0.9rem; }
         .badge-success { background: rgba(39, 174, 96, 0.1); color: #2ecc71; padding: 4px 10px; border-radius: 50px; font-size: 0.75rem; }
 
         @media (max-width: 992px) {
             .mock-sidebar { display: none; }
-            .mock-main { margin-left: 0; }
+            .mock-container { margin: 20px; }
         }
     </style>
 </head>
@@ -219,19 +186,35 @@
         <a href="https://personal-portfolio-ashen-kappa-71.vercel.app/projects.html" class="bar-btn">Back to Portfolio</a>
     </div>
 
-    <!-- Mock Navbar -->
-    <nav class="mock-navbar">
-        <div class="d-flex align-items-center fw-bold text-white fs-5">
-            <i class="bi bi-envelope-check-fill text-primary me-2"></i> CleanBox AI
-        </div>
-        <div class="d-flex align-items-center gap-3">
-            <div class="text-end d-none d-sm-block">
-                <div class="fw-bold small text-white">Lokesh Ahire</div>
-                <div class="text-muted" style="font-size: 0.7rem;">Demo User</div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">AI-Powered Email Management</span>
+            <h1>CleanBox AI</h1>
+            <p>A smart, secure, and efficient way to declutter your Gmail inbox using advanced scanning and automated cleanup rules. Experience the future of email management.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#" class="btn btn-primary btn-lg rounded-pill px-5 demo-trigger">
+                    <i class="bi bi-rocket-takeoff-fill me-2"></i> Launch Application
+                </a>
             </div>
-            <img src="https://i.pravatar.cc/150?u=lokesh" width="35" height="35" class="rounded-circle border border-2 border-primary">
         </div>
-    </nav>
+    </section>
+
+    <!-- Mock Navbar -->
+    <div style="margin: 0 40px; border-radius: 24px 24px 0 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); border-bottom: none;">
+        <nav class="mock-navbar">
+            <div class="d-flex align-items-center fw-bold text-white fs-5">
+                <i class="bi bi-envelope-check-fill text-primary me-2"></i> CleanBox AI
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="text-end d-none d-sm-block">
+                    <div class="fw-bold small text-white">Lokesh Ahire</div>
+                    <div class="text-muted" style="font-size: 0.7rem;">Demo User</div>
+                </div>
+                <img src="https://i.pravatar.cc/150?u=lokesh" width="35" height="35" class="rounded-circle border border-2 border-primary">
+            </div>
+        </nav>
+    </div>
 
     <div class="mock-container">
         <!-- Mock Sidebar -->
@@ -248,92 +231,72 @@
 
         <!-- Mock Main Content -->
         <div class="mock-main">
-            <div class="mock-card-wrapper">
-                <div class="row mb-4 align-items-center">
-                    <div class="col">
-                        <h2 class="fw-bold text-white">Overview</h2>
-                        <p class="text-muted small mb-0">Track your inbox health and cleanup efficiency.</p>
-                    </div>
+            <div class="row mb-4 align-items-center">
+                <div class="col">
+                    <h2 class="fw-bold text-white">Overview</h2>
+                    <p class="text-muted small mb-0">Track your inbox health and cleanup efficiency.</p>
                 </div>
+            </div>
 
-                <div class="row g-4">
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-icon bg-primary-subtle text-primary"><i class="bi bi-envelope-open"></i></div>
-                            <div class="text-muted small">Emails Scanned</div>
-                            <h3 class="fw-bold text-white mt-1">1,475</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-icon bg-warning-subtle text-warning"><i class="bi bi-shield-lock"></i></div>
-                            <div class="text-muted small">Useless OTPs</div>
-                            <h3 class="fw-bold text-white mt-1">35</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-icon bg-danger-subtle text-danger"><i class="bi bi-shield-exclamation"></i></div>
-                            <div class="text-muted small">Spam Found</div>
-                            <h3 class="fw-bold text-white mt-1">24</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-icon bg-success-subtle text-success"><i class="bi bi-hdd"></i></div>
-                            <div class="text-muted small">Space Freed</div>
-                            <h3 class="fw-bold text-white mt-1">99.7 MB</h3>
-                        </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary-subtle text-primary"><i class="bi bi-envelope-open"></i></div>
+                        <div class="text-muted small">Emails Scanned</div>
+                        <h3 class="fw-bold text-white mt-1">1,475</h3>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning-subtle text-warning"><i class="bi bi-shield-lock"></i></div>
+                        <div class="text-muted small">Useless OTPs</div>
+                        <h3 class="fw-bold text-white mt-1">35</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-danger-subtle text-danger"><i class="bi bi-shield-exclamation"></i></div>
+                        <div class="text-muted small">Spam Found</div>
+                        <h3 class="fw-bold text-white mt-1">24</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success-subtle text-success"><i class="bi bi-hdd"></i></div>
+                        <div class="text-muted small">Space Freed</div>
+                        <h3 class="fw-bold text-white mt-1">99.7 MB</h3>
+                    </div>
+                </div>
+            </div>
 
-                <div class="scan-config-card">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8">
-                            <h4 class="fw-bold text-white mb-2">Ready to clean your inbox?</h4>
-                            <p class="text-muted mb-0">Our AI identifies promotional junk, newsletters, and expired OTPs in seconds.</p>
-                        </div>
-                        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                            <button class="btn btn-primary rounded-pill px-5 py-3 fw-bold shadow-lg">
-                                <i class="bi bi-lightning-charge-fill me-2"></i> Start Scanning
-                            </button>
-                        </div>
+            <div class="scan-config-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h4 class="fw-bold text-white mb-2">Ready to clean your inbox?</h4>
+                        <p class="text-muted mb-0">Our AI identifies promotional junk, newsletters, and expired OTPs in seconds.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                        <button class="btn btn-primary rounded-pill px-5 py-3 fw-bold shadow-lg demo-trigger">
+                            <i class="bi bi-lightning-charge-fill me-2"></i> Start Scanning
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                <h4 class="fw-bold text-white mt-5 mb-3">Recent Activity</h4>
-                <div class="table-responsive">
-                    <table class="mock-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Action Taken</th>
-                                <th>Space Freed</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>May 11, 2026</td>
-                                <td>Bulk deleted 185 promotional emails</td>
-                                <td class="text-success fw-bold">+24.5 MB</td>
-                                <td><span class="badge-success">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>May 10, 2026</td>
-                                <td>Cleaned 35 expired OTPs & codes</td>
-                                <td class="text-success fw-bold">+1.2 MB</td>
-                                <td><span class="badge-success">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>May 09, 2026</td>
-                                <td>Emptied spam folder (24 emails)</td>
-                                <td class="text-success fw-bold">+4.8 MB</td>
-                                <td><span class="badge-success">Completed</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <h4 class="fw-bold text-white mt-5 mb-3">Recent Activity</h4>
+            <div class="table-responsive">
+                <table class="mock-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th><th>Action Taken</th><th>Space Freed</th><th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>May 11, 2026</td><td>Bulk deleted 185 promotional emails</td><td class="text-success fw-bold">+24.5 MB</td><td><span class="badge-success">Completed</span></td></tr>
+                        <tr><td>May 10, 2026</td><td>Cleaned 35 expired OTPs & codes</td><td class="text-success fw-bold">+1.2 MB</td><td><span class="badge-success">Completed</span></td></tr>
+                        <tr><td>May 09, 2026</td><td>Emptied spam folder (24 emails)</td><td class="text-success fw-bold">+4.8 MB</td><td><span class="badge-success">Completed</span></td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -341,7 +304,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.querySelectorAll('.sidebar-link, .mock-main button, .mock-navbar img, .mock-navbar .fw-bold.small').forEach(element => {
+        document.querySelectorAll('.sidebar-link, button.demo-trigger, a.demo-trigger, .mock-navbar img, .mock-navbar .fw-bold.small').forEach(element => {
             element.addEventListener('click', function(e) {
                 e.preventDefault();
                 Swal.fire({
